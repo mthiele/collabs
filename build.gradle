@@ -1,0 +1,1 @@
+task buildAll(dependsOn : [':client:npm_run_build', ':server:build'])
