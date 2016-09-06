@@ -4,6 +4,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.eventbus.DeliveryOptions;
+import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.sockjs.BridgeEventType;
@@ -20,9 +21,19 @@ public class HelloWorldVerticle extends AbstractVerticle {
     public void start() {
         final Router router = Router.router(vertx);
         router.route("/eventbus/*").handler(eventBusHandler());
-        vertx.createHttpServer().requestHandler(router::accept).listen(8080);
+        router.route("/api").handler(routingContext -> {
+            HttpServerResponse response = routingContext.response();
+            response
+                    .putHeader("content-type", "text/html")
+                    .end("<h1>Hello from my first Vert.x 3 application</h1>");
+        });
 
-        vertx.setPeriodic(1000, event -> vertx.eventBus().publish("yeah", "omg!"));
+        vertx.createHttpServer().
+                requestHandler(router::accept).
+                listen(8080);
+
+        vertx.setPeriodic(1000, event -> vertx.eventBus().
+                publish("yeah", "omg!"));
     }
 
     private SockJSHandler eventBusHandler() {
