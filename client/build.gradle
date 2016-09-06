@@ -4,6 +4,9 @@ plugins {
 
 node {
   version = '6.5.0'
-  npmVersion = '3.10.6'
   download = true
+}
+
+npm_install {
+  args = ['--save']
 }
