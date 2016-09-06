@@ -1,8 +1,17 @@
-import { Component } from '@angular/core';
+import {Component, Renderer, ElementRef} from '@angular/core';
 
 import { AppState } from '../app.service';
 import { Title } from './title';
 import { XLarge } from './x-large';
+
+interface EventBus {
+  onopen: () => void;
+  registerHandler: (topic: string, callback: (err: string, msg: string) => void) => void;
+}
+
+declare var EventBus: {
+  new (m: string): EventBus;
+}
 
 @Component({
   // The selector is what angular internally uses
@@ -29,6 +38,18 @@ export class Home {
   ngOnInit() {
     console.log('hello `Home` component');
     // this.title.getData().subscribe(data => this.data = data);
+  }
+
+  ngAfterViewInit() {
+    var eb = new EventBus('http://localhost:8080/eventbus');
+
+    eb.onopen = function() {
+
+      // set a handler to receive a message
+      eb.registerHandler('yeah', function (error, message) {
+        console.log('received a message: ' + message.body);
+      });
+    }
   }
 
   submitState(value) {
