@@ -16,9 +16,20 @@ sourceCompatibility = '1.8'
 mainClassName = 'io.vertx.core.Launcher'
 
 dependencies {
-  compile "io.vertx:vertx-core:$version"
+  compile "io.vertx:vertx-core:$version", "io.vertx:vertx-web:$version"
   testCompile 'junit:junit:4.12'
   testCompile "io.vertx:vertx-unit:$version"
+}
+
+distributions {
+  main {
+    baseName = 'myserver'
+    contents {
+      into('client') {
+        from '../client/dist'
+      }
+    }
+  }
 }
 
 shadowJar {
