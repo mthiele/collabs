@@ -20,7 +20,7 @@ public class HelloWorldVerticle extends AbstractVerticle {
   @Override
   public void start(Future<Void> fut) {
     Router router = Router.router(vertx);
-    router.route("/").handler(routingContext -> {
+    router.route("/api").handler(routingContext -> {
       HttpServerResponse response = routingContext.response();
       response
           .putHeader("content-type", "text/html")
@@ -28,7 +28,7 @@ public class HelloWorldVerticle extends AbstractVerticle {
     });
 
     // Serve static resources from the /assets directory
-    router.route("/assets/*").handler(StaticHandler.create("assets"));
+    router.route("/*").handler(StaticHandler.create("assets"));
 
     vertx
         .createHttpServer()

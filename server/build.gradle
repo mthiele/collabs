@@ -19,6 +19,17 @@ dependencies {
     compile "io.vertx:vertx-core:$version", "io.vertx:vertx-web:$version"
 }
 
+distributions {
+    main {
+        baseName = 'myserver'
+        contents {
+            into('client') {
+                from '../client/dist'
+            }
+        }
+    }
+}
+
 shadowJar {
     classifier = 'fat'
     manifest {
