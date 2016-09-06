@@ -1,1 +1,10 @@
-task buildAll(dependsOn : [':client:npm_run_build', ':server:build'])
+println """\
+Welcome to Gradle $gradle.gradleVersion - http://www.gradle.org
+Gradle home is set to: $gradle.gradleHomeDir
+Gradle user directory is set to: $gradle.gradleUserHomeDir
+
+Base directory: $projectDir
+Running script ${relativePath(buildFile)}
+"""
+
+task buildAll(dependsOn: [':client:npm_run_build', ':server:build'])
