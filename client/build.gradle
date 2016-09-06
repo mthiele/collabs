@@ -1,0 +1,12 @@
+plugins {
+  id "com.moowork.node" version "0.13"
+}
+
+node {
+  version = '6.5.0'
+  download = true
+}
+
+npm_install {
+  args = ['--save']
+}
