@@ -39,7 +39,7 @@ public class HelloWorldVerticleTest {
   public void shouldAnswerHelloWorld(final TestContext context) throws Exception {
     final Async async = context.async();
 
-    vertx.createHttpClient().getNow(8080, "localhost", "/",
+    vertx.createHttpClient().getNow(8080, "localhost", "/api",
         response -> {
           response.handler(body -> {
             context.assertTrue(body.toString().contains("Hello"));
