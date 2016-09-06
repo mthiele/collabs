@@ -1,14 +1,14 @@
 plugins {
-    id 'java'
-    id 'application'
-    id 'com.github.johnrengelman.shadow' version '1.2.3'
+  id 'java'
+  id 'application'
+  id 'com.github.johnrengelman.shadow' version '1.2.3'
 }
 
 repositories {
-    mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/iovertx-2993"
-    }
+  mavenCentral()
+  maven {
+    url "https://oss.sonatype.org/content/repositories/iovertx-2993"
+  }
 }
 
 version = '3.3.2'
@@ -22,26 +22,26 @@ dependencies {
 }
 
 distributions {
-    main {
-        baseName = 'myserver'
-        contents {
-            into('client') {
-                from '../client/dist'
-            }
-        }
+  main {
+    baseName = 'myserver'
+    contents {
+      into('client') {
+        from '../client/dist'
+      }
     }
+  }
 }
 
 shadowJar {
-    classifier = 'fat'
-    manifest {
-        attributes 'Main-Verticle': 'io.vertx.example.HelloWorldVerticle'
-    }
-    mergeServiceFiles {
-        include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
-    }
+  classifier = 'fat'
+  manifest {
+    attributes 'Main-Verticle': 'io.vertx.example.HelloWorldVerticle'
+  }
+  mergeServiceFiles {
+    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
+  }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.8'
+  gradleVersion = '2.8'
 }
