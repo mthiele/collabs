@@ -9,6 +9,7 @@ const helpers = require('./helpers');
  * Webpack Plugins
  */
 // problem with copy-webpack-plugin
+var ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
@@ -252,6 +253,10 @@ module.exports = {
      */
     new HtmlElementsPlugin({
       headTags: require('./head-config.common')
+    }),
+
+    new ProvidePlugin({
+      EventBus: "vertx3-eventbus-client"
     }),
 
   ],
