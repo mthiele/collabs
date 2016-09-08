@@ -1,9 +1,9 @@
 /*
  * Angular 2 decorators and services
  */
-import { Component, ViewEncapsulation } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
-import { AppState } from './app.service';
+import {AppState} from './app.service';
 
 /*
  * App Component
@@ -16,13 +16,8 @@ import { AppState } from './app.service';
     './app.style.css'
   ],
   template: `
+    <div class="root">
     <nav>
-      <span>
-        <a [routerLink]=" ['./'] ">
-          Index
-        </a>
-      </span>
-      |
       <span>
         <a [routerLink]=" ['./home'] ">
           Home
@@ -46,16 +41,10 @@ import { AppState } from './app.service';
       <router-outlet></router-outlet>
     </main>
 
-    <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
-
     <footer>
-      <span>WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a></span>
-      <div>
-        <a [href]="url">
-          <img [src]="angularclassLogo" width="25%">
-        </a>
-      </div>
+      <span>Wertekompaß powered by <a target="_blank" href="http://saxsys.de">saxsys.de</a></span>
     </footer>
+    </div>
   `
 })
 export class App {
@@ -63,8 +52,7 @@ export class App {
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
 
-  constructor(
-    public appState: AppState) {
+  constructor(public appState: AppState) {
 
   }
 
