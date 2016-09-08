@@ -21,6 +21,12 @@ import '@angularclass/hmr';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
+// Highcharts
+import 'highcharts';
+import 'highcharts/highcharts-more';
+import 'highcharts/modules/exporting';
+import 'ng2-highcharts';
+
 if ('production' === ENV) {
   // Production
 

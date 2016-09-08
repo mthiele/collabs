@@ -18,6 +18,9 @@ import { Home } from './home';
 import { About } from './about';
 import { NoContent } from './no-content';
 import { XLarge } from './home/x-large';
+import {ChartsComponent} from "./chart/charts.component";
+import {CommonModule} from "@angular/common";
+import {Ng2HighchartsModule} from "ng2-highcharts";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -35,13 +38,16 @@ const APP_PROVIDERS = [
     About,
     Home,
     NoContent,
-    XLarge
+    XLarge,
+    ChartsComponent
   ],
   imports: [ // import Angular's modules
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, { useHash: true })
+    RouterModule.forRoot(ROUTES, { useHash: true }),
+    CommonModule,
+    Ng2HighchartsModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,

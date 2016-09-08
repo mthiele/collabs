@@ -4,6 +4,7 @@
 
 const webpack = require('webpack');
 const helpers = require('./helpers');
+const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 
 /*
  * Webpack Plugins
@@ -254,7 +255,12 @@ module.exports = {
       headTags: require('./head-config.common')
     }),
 
-  ],
+
+  new ProvidePlugin({
+    Highcharts: "highcharts"
+  }),
+
+],
 
   /*
    * Include polyfills or mocks for various node stuff
