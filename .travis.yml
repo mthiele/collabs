@@ -9,4 +9,6 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-script: ./gradlew -version && ./gradlew it
+script:
+  - echo $JAVA_HOME
+  - ./gradlew -version && ./gradlew it
