@@ -11,6 +11,18 @@ Base directory: $projectDir
 Running script ${relativePath(buildFile)}
 """
 
+task buildAll(dependsOn: [':client:npm_run_build', ':server:build'])
+
+task postIt(type: StopVerticle)
+
+task preIt(type: StartVerticle, dependsOn: 'buildAll') {
+    def lib = """.\\server\\build\\distributions\\myserver-3.3.2\\lib"""
+    command """java -classpath "$lib\\server-3.3.2.jar;$lib\\vertx-core-3.3.2.jar;$lib\\vertx-web-3.3.2.jar;$lib\\netty-common-4.1.1.Final.jar;$lib\\netty-buffer-4.1.1.Final.jar;$lib\\netty-transport-4.1.1.Final.jar;$lib\\netty-handler-4.1.1.Final.jar;$lib\\netty-handler-proxy-4.1.1.Final.jar;$lib\\netty-codec-http-4.1.1.Final.jar;$lib\\netty-codec-http2-4.1.1.Final.jar;$lib\\netty-resolver-4.1.1.Final.jar;$lib\\netty-resolver-dns-4.1.1.Final.jar;$lib\\jackson-core-2.7.4.jar;$lib\\jackson-databind-2.7.4.jar;$lib\\vertx-auth-common-3.3.2.jar;$lib\\netty-codec-4.1.1.Final.jar;$lib\\netty-codec-socks-4.1.1.Final.jar;$lib\\netty-codec-dns-4.1.1.Final.jar;$lib\\jackson-annotations-2.7.0.jar" io.vertx.core.Launcher run io.vertx.example.HelloWorldVerticle"""
+    ready 'Succeeded in deploying verticle'
+    finalizedBy postIt
+}
+
+// adapted from https://github.com/marc0der/gradle-spawn-plugin
 class StartVerticle extends DefaultTask {
     String command
     String ready
@@ -49,13 +61,3 @@ class StopVerticle extends DefaultTask {
         }
     }
 }
-
-task buildAll(dependsOn: [':client:npm_run_build', ':server:build'])
-
-task preIt(type: StartVerticle) {
-    def lib = """.\\server\\build\\distributions\\myserver-3.3.2\\lib"""
-    command """java -classpath "$lib\\server-3.3.2.jar;$lib\\vertx-core-3.3.2.jar;$lib\\vertx-web-3.3.2.jar;$lib\\netty-common-4.1.1.Final.jar;$lib\\netty-buffer-4.1.1.Final.jar;$lib\\netty-transport-4.1.1.Final.jar;$lib\\netty-handler-4.1.1.Final.jar;$lib\\netty-handler-proxy-4.1.1.Final.jar;$lib\\netty-codec-http-4.1.1.Final.jar;$lib\\netty-codec-http2-4.1.1.Final.jar;$lib\\netty-resolver-4.1.1.Final.jar;$lib\\netty-resolver-dns-4.1.1.Final.jar;$lib\\jackson-core-2.7.4.jar;$lib\\jackson-databind-2.7.4.jar;$lib\\vertx-auth-common-3.3.2.jar;$lib\\netty-codec-4.1.1.Final.jar;$lib\\netty-codec-socks-4.1.1.Final.jar;$lib\\netty-codec-dns-4.1.1.Final.jar;$lib\\jackson-annotations-2.7.0.jar" io.vertx.core.Launcher run io.vertx.example.HelloWorldVerticle"""
-    ready 'Succeeded in deploying verticle'
-}
-
-task postIt(type: StopVerticle, dependsOn: 'preIt')
