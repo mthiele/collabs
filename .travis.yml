@@ -9,4 +9,4 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-script: ./gradlew -version && ./gradlew buildAll
+script: ./gradlew -version && ./gradlew it
