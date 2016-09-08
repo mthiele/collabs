@@ -31,7 +31,7 @@ export class Home {
 
       // set a handler to receive a message
       eb.registerHandler('yeah', function (error, message) {
-        console.log('received a message: ' + message.body);
+        console.log('received a message: ' + message);
       });
     }
   }

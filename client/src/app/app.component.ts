@@ -15,37 +15,7 @@ import {AppState} from './app.service';
   styleUrls: [
     './app.style.css'
   ],
-  template: `
-    <div class="root">
-    <nav>
-      <span>
-        <a [routerLink]=" ['./home'] ">
-          Home
-        </a>
-      </span>
-      |
-      <span>
-        <a [routerLink]=" ['./detail'] ">
-          Detail
-        </a>
-      </span>
-      |
-      <span>
-        <a [routerLink]=" ['./about'] ">
-          About
-        </a>
-      </span>
-    </nav>
-
-    <main>
-      <router-outlet></router-outlet>
-    </main>
-
-    <footer>
-      <span>Wertekompaß powered by <a target="_blank" href="http://saxsys.de">saxsys.de</a></span>
-    </footer>
-    </div>
-  `
+  templateUrl: './app.template.html'
 })
 export class App {
   angularclassLogo = 'assets/img/angularclass-avatar.png';
