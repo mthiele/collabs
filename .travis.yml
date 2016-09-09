@@ -16,6 +16,6 @@ cache:
 before_script:
   - echo $TRAVIS_BUILD_DIR
   - echo $JAVA_HOME
-  - $JAVA_HOME/bin/java -version
 script:
-  - ./gradlew -version && ./gradlew it
+#  - ./gradlew -version && ./gradlew it
+  - ./gradlew startJava

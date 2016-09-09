@@ -17,6 +17,13 @@ task postIt(type: StopVerticle) {
     mustRunAfter ':it'
 }
 
+task startJava(type: StartVerticle) {
+    def java_home = System.getenv("JAVA_HOME")
+    directory "."
+    command """$java_home/bin/java -version"""
+    ready "VM"
+}
+
 task preIt(type: StartVerticle, dependsOn: 'buildAll') {
     ready 'Succeeded in deploying verticle'
     finalizedBy postIt
