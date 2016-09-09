@@ -44,6 +44,7 @@ class StartVerticle extends DefaultTask {
 
     @TaskAction
     def spawnProcess() {
+        println "execute command: '$command'"
         ProcessBuilder builder = new ProcessBuilder(command.split(' '))
         builder.redirectErrorStream(true)
         builder.directory(new File(directory))
