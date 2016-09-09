@@ -9,8 +9,10 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-script:
+before_script:
   - echo $TRAVIS_BUILD_DIR
-  - ls $TRAVIS_BUILD_DIR
   - echo $JAVA_HOME
+  - ls $JAVA_HOME
+  - ls $JAVA_HOME/bin
+script:
   - ./gradlew -version && ./gradlew it
