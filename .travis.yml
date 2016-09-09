@@ -17,5 +17,4 @@ before_script:
   - echo $TRAVIS_BUILD_DIR
   - echo $JAVA_HOME
 script:
-#  - ./gradlew -version && ./gradlew it
-  - ./gradlew startJava
+  - ./gradlew -version && ./gradlew it
