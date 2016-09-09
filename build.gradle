@@ -19,7 +19,7 @@ task postIt(type: StopVerticle) {
 
 task startJava(type: StartVerticle) {
     def java_home = System.getenv("JAVA_HOME")
-    directory "server/build"
+    directory "server/build/distributions/myserver-3.3.2/"
     command """$java_home/bin/java -version"""
     ready "VM"
 }
