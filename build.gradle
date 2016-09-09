@@ -26,6 +26,7 @@ task preIt(type: StartVerticle, dependsOn: ['unzipDist']) {
     ready 'Succeeded in deploying verticle'
     finalizedBy postIt
     directory "server/build/distributions/myserver-3.3.2"
+    fileTree(directory).each {println(it)}
     def java_home = System.getenv("JAVA_HOME")
     command """$java_home/bin/java -classpath "lib/server-3.3.2.jar;lib/vertx-core-3.3.2.jar;lib/vertx-web-3.3.2.jar;lib/netty-common-4.1.1.Final.jar;lib/netty-buffer-4.1.1.Final.jar;lib/netty-transport-4.1.1.Final.jar;lib/netty-handler-4.1.1.Final.jar;lib/netty-handler-proxy-4.1.1.Final.jar;lib/netty-codec-http-4.1.1.Final.jar;lib/netty-codec-http2-4.1.1.Final.jar;lib/netty-resolver-4.1.1.Final.jar;lib/netty-resolver-dns-4.1.1.Final.jar;lib/jackson-core-2.7.4.jar;lib/jackson-databind-2.7.4.jar;lib/vertx-auth-common-3.3.2.jar;lib/netty-codec-4.1.1.Final.jar;lib/netty-codec-socks-4.1.1.Final.jar;lib/netty-codec-dns-4.1.1.Final.jar;lib/jackson-annotations-2.7.0.jar" io.vertx.core.Launcher run io.vertx.example.HelloWorldVerticle"""
 }
