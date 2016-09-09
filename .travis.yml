@@ -16,7 +16,7 @@ cache:
 before_script:
   - echo $TRAVIS_BUILD_DIR
   - echo $JAVA_HOME
-  - ls $JAVA_HOME
-  - ls $JAVA_HOME/bin
+  - ls -al $JAVA_HOME/bin
+  - ls -al $JAVA_HOME/..
 script:
   - ./gradlew -version && ./gradlew it
