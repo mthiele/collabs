@@ -11,15 +11,17 @@ import {removeNgStyles, createNewHosts} from '@angularclass/hmr';
 import {ENV_PROVIDERS} from './environment';
 import {ROUTES} from './app.routes';
 // App is our top level component
-import { App } from './app.component';
-import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState } from './app.service';
-import { Home } from './home';
-import { NoContent } from './no-content';
-import { XLarge } from './home/x-large';
+import {App} from './app.component';
+import {APP_RESOLVER_PROVIDERS} from './app.resolver';
+import {AppState} from './app.service';
+import {Home} from './home';
+import {NoContent} from './no-content';
+import {XLarge} from './home/x-large';
 import {RadarChartDemo} from "./chart/radarchartdemo.component";
 import {UIChart} from "primeng/components/chart/chart";
-
+import {ValueCompassService}          from './valueCompass.service';
+import './rxjs-extensions';
+import {ValueCompassComponent} from "./valuecompass/valueCompass.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -35,6 +37,7 @@ const APP_PROVIDERS = [
   declarations: [
     App,
     Home,
+    ValueCompassComponent,
     NoContent,
     XLarge,
     RadarChartDemo,
@@ -48,7 +51,8 @@ const APP_PROVIDERS = [
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    ValueCompassService
   ]
 })
 export class AppModule {

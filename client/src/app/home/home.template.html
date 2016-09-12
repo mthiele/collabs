@@ -9,7 +9,7 @@
                #name="ngModel"/>
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-default" [disabled]="name.invalid">
+        <button type="submit" class="btn btn-default" [disabled]="name.invalid" (click)="createCompass()">
           Create
         </button>
       </div>
