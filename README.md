@@ -7,4 +7,5 @@
     * Classpath: ```Server_main```
 * Start Client
     * ```cd ./client```
+    * ```npm install```
     * ```npm run server```

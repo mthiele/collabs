@@ -11,12 +11,15 @@ import {removeNgStyles, createNewHosts} from '@angularclass/hmr';
 import {ENV_PROVIDERS} from './environment';
 import {ROUTES} from './app.routes';
 // App is our top level component
-import {App} from './app.component';
-import {APP_RESOLVER_PROVIDERS} from './app.resolver';
-import {AppState} from './app.service';
-import {Home} from './home';
-import {NoContent} from './no-content';
-import {XLarge} from './home/x-large';
+import { App } from './app.component';
+import { APP_RESOLVER_PROVIDERS } from './app.resolver';
+import { AppState } from './app.service';
+import { Home } from './home';
+import { NoContent } from './no-content';
+import { XLarge } from './home/x-large';
+import {RadarChartDemo} from "./chart/radarchartdemo.component";
+import {UIChart} from "primeng/components/chart/chart";
+
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -33,7 +36,9 @@ const APP_PROVIDERS = [
     App,
     Home,
     NoContent,
-    XLarge
+    XLarge,
+    RadarChartDemo,
+    UIChart
   ],
   imports: [ // import Angular's modules
     BrowserModule,

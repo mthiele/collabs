@@ -3,7 +3,8 @@
   <div class="container">
     <form class="form-inline">
       <div class="form-group">
-        <input placeholder="Mein Wertekompass" type="text" class="form-control" id="name" required
+        <input placeholder="Mein Wertekompass" type="text" class="form-control" id="name"
+               required maxlength="255" pattern=".*\S.*"
                [(ngModel)]="newCompassName" name="name"
                #name="ngModel"/>
       </div>
