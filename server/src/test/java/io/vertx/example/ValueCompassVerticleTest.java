@@ -11,14 +11,14 @@ import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
 
 @RunWith(VertxUnitRunner.class)
-public class HelloWorldVerticleTest {
+public class ValueCompassVerticleTest {
 
   private Vertx vertx;
 
   @Before
   public void setUp(final TestContext context) {
     vertx = Vertx.vertx();
-    vertx.deployVerticle(HelloWorldVerticle.class.getName(),
+    vertx.deployVerticle(ValueCompassVerticle.class.getName(),
         context.asyncAssertSuccess());
   }
 
@@ -31,7 +31,7 @@ public class HelloWorldVerticleTest {
   public void shouldAnswerHelloWorld(final TestContext context) throws Exception {
     final Async async = context.async();
 
-    vertx.createHttpClient().getNow(8080, "localhost", "/api",
+    vertx.createHttpClient().getNow(8080, "localhost", "/api/hello",
         response -> {
           response.handler(body -> {
             context.assertTrue(body.toString().contains("Hello"));
