@@ -6,7 +6,7 @@ require('ts-node/register');
 var helpers = require('./helpers');
 
 exports.config = {
-  baseUrl: 'http://localhost:3000/',
+  baseUrl: 'http://localhost:8080/',
 
   // use `npm run e2e`
   specs: [
@@ -29,13 +29,10 @@ exports.config = {
   directConnect: true,
 
   capabilities: {
-    'browserName': 'chrome',
-    'chromeOptions': {
-      'args': ['show-fps-counter=true']
-    }
+    'browserName': 'chrome'
   },
 
-  onPrepare: function() {
+  onPrepare: function () {
     browser.ignoreSynchronization = true;
   },
 
@@ -45,5 +42,10 @@ exports.config = {
    * useAllAngular2AppRoots: tells Protractor to wait for any angular2 apps on the page instead of just the one matching
    * `rootEl`
    */
-   useAllAngular2AppRoots: true
+  useAllAngular2AppRoots: true
 };
+
+if (process.env.TRAVIS !== undefined) {
+  exports.config.capabilities = {'browserName': 'firefox'}
+}
+

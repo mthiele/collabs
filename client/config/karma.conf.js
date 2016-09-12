@@ -76,7 +76,7 @@ module.exports = function(config) {
      * available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
      */
     browsers: [
-      'Chrome'
+      'Firefox'
     ],
 
     customLaunchers: {
@@ -94,7 +94,8 @@ module.exports = function(config) {
   };
 
   if (process.env.TRAVIS){
-    configuration.browsers = ['ChromeTravisCi'];
+    // FIXME: at the moment, there is no Chrome installed in Travis
+    // configuration.browsers = ['ChromeTravisCi'];
   }
 
   config.set(configuration);

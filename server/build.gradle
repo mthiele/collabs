@@ -26,6 +26,17 @@ dependencies {
   testCompile 'org.mockito:mockito-all:1.10.19'
 }
 
+distributions {
+  main {
+    baseName = 'myserver'
+    contents {
+      into('client') {
+        from '../client/dist'
+      }
+    }
+  }
+}
+
 shadowJar {
   classifier = 'fat'
   manifest {
