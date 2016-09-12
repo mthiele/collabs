@@ -9,8 +9,7 @@ import io.vertx.ext.web.RoutingContext;
  *
  */
 public class NewValueCompassHandler implements Handler<RoutingContext> {
-  private static final int CREATED = 201;
-  private ValueCompassModel valueCompassModel;
+  private final ValueCompassModel valueCompassModel;
 
   public NewValueCompassHandler(final ValueCompassModel valueCompassModel) {
     this.valueCompassModel = valueCompassModel;
@@ -21,11 +20,19 @@ public class NewValueCompassHandler implements Handler<RoutingContext> {
     final CompassCreation compassCreation = Json.decodeValue(event.getBodyAsString(), CompassCreation.class);
     final HttpServerResponse response = event.response();
     System.out.println("creating new value compass: " + compassCreation);
-    final ValueCompass newCompass = valueCompassModel.newCompass(compassCreation);
-    System.out.println("new compass: " + newCompass);
-    response
-        .setStatusCode(CREATED)
-        .putHeader("content-type", "application/json; charset=utf-8")
-        .end(Json.encodePrettily(newCompass));
+    try {
+      final ValueCompass newCompass = valueCompassModel.newCompass(compassCreation);
+      System.out.println("new compass: " + newCompass);
+      response
+          .setStatusCode(HttpStatus.CREATED)
+          .putHeader("content-type", "application/json; charset=utf-8")
+          .end(Json.encodePrettily(newCompass));
+    } catch (final IllegalArgumentException ilArgEx) {
+      System.err.println("Could nt create value compass: " + ilArgEx.getMessage());
+      response
+          .setStatusCode(HttpStatus.UNPROCESSABLE_ENTITY)
+          .putHeader("content-type", "application/json; charset=utf-8")
+          .end("{\"msg\":\"A compass must have a non blank name\"}");
+    }
   }
 }

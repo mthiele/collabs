@@ -17,10 +17,12 @@ public class ValueCompassVerticle extends AbstractVerticle {
 
   private ValueCompassModel valueCompassModel;
   private NewValueCompassHandler newValueCompassHandler;
+  private GetValueCompassHandler getValueCompassHandler;
 
   public ValueCompassVerticle() {
     valueCompassModel = new ValueCompassModel();
     newValueCompassHandler = new NewValueCompassHandler(valueCompassModel);
+    getValueCompassHandler = new GetValueCompassHandler(valueCompassModel);
   }
 
   @Override
@@ -35,6 +37,7 @@ public class ValueCompassVerticle extends AbstractVerticle {
     });
     router.route("/api/valueCompass").handler(BodyHandler.create());
     router.post("/api/valueCompass").handler(newValueCompassHandler::handle);
+    router.get("/api/valueCompass/:id").handler(getValueCompassHandler::handle);
 
     vertx.createHttpServer().
         requestHandler(router::accept).
