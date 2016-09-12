@@ -23,6 +23,9 @@ import 'rxjs/add/operator/mergeMap';
 
 import 'vertx3-eventbus-client';
 
+import 'jquery';
+import 'bootstrap-loader';
+
 if ('production' === ENV) {
   // Production
 
