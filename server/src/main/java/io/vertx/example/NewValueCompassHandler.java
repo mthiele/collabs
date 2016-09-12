@@ -32,6 +32,7 @@ public class NewValueCompassHandler implements Handler<RoutingContext> {
       response
           .setStatusCode(HttpStatus.UNPROCESSABLE_ENTITY)
           .putHeader("content-type", "application/json; charset=utf-8")
+          .putHeader("Access-Control-Allow-Origin","*")
           .end("{\"msg\":\"A compass must have a non blank name\"}");
     }
   }

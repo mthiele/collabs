@@ -1,6 +1,8 @@
 import {Component, Renderer, ElementRef} from '@angular/core';
+import {Router} from '@angular/router';
 
-import {XLarge} from './x-large';
+import {ValueCompassService} from "../valueCompass.service";
+import {ValueCompass} from "../valueCompass";
 
 interface EventBus {
   onopen: () => void;
@@ -19,9 +21,27 @@ declare var EventBus: {
 export class Home {
   newCompassName: string;
 
+  constructor(private router: Router,
+              private valueCompassService: ValueCompassService) {
+  }
+
   ngOnInit() {
     console.log('hello `Home` component');
-    // this.title.getData().subscribe(data => this.data = data);
+  }
+
+  createCompass() {
+    console.log('submit: ' + this.newCompassName);
+    this.valueCompassService.create(this.newCompassName).then((valueCompass: ValueCompass) => {
+        console.log('new compass id: ' + valueCompass.id);
+        this.gotoValueCompass(valueCompass.id);
+      }
+    );
+  }
+
+  gotoValueCompass(id: string): void {
+    console.log('route to: ' + id);
+    let link = ['/valueCompass', id, 'voting'];
+    this.router.navigate(link);
   }
 
   ngAfterViewInit() {
@@ -31,7 +51,7 @@ export class Home {
 
       // set a handler to receive a message
       eb.registerHandler('yeah', function (error, message) {
-        console.log('received a message: ' + message);
+        // console.log('received a message: ' + message);
       });
     }
   }

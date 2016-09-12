@@ -5,6 +5,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
+import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.handler.sockjs.BridgeEventType;
 import io.vertx.ext.web.handler.sockjs.BridgeOptions;
@@ -30,6 +31,13 @@ public class ValueCompassVerticle extends AbstractVerticle {
   public void start() {
     final Router router = Router.router(vertx);
     router.route("/eventbus/*").handler(eventBusHandler());
+
+    router.route().handler(CorsHandler.create("*")
+        .allowedMethod(HttpMethod.GET)
+        .allowedMethod(HttpMethod.POST)
+        .allowedMethod(HttpMethod.OPTIONS)
+        .allowedHeader("Content-Type"));
+
     router.route("/api/hello").handler(routingContext -> {
       HttpServerResponse response = routingContext.response();
       response

@@ -34,6 +34,7 @@ public class GetValueCompassHandler implements Handler<RoutingContext> {
       response
           .setStatusCode(HttpStatus.OK)
           .putHeader("content-type", "application/json; charset=utf-8")
+          .putHeader("Access-Control-Allow-Origin", "*")
           .end(Json.encodePrettily(compass));
     }
 
