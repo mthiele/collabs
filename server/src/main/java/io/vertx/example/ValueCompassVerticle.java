@@ -5,6 +5,7 @@ import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
+import io.vertx.ext.web.handler.StaticHandler;
 import io.vertx.ext.web.handler.sockjs.BridgeEventType;
 import io.vertx.ext.web.handler.sockjs.BridgeOptions;
 import io.vertx.ext.web.handler.sockjs.PermittedOptions;
@@ -38,6 +39,9 @@ public class ValueCompassVerticle extends AbstractVerticle {
     router.route("/api/valueCompass").handler(BodyHandler.create());
     router.post("/api/valueCompass").handler(newValueCompassHandler::handle);
     router.get("/api/valueCompass/:id").handler(getValueCompassHandler::handle);
+    // Serve static resources from the /client directory
+    router.route("/*").handler(StaticHandler.create("client"));
+
 
     vertx.createHttpServer().
         requestHandler(router::accept).
