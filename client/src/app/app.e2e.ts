@@ -11,12 +11,6 @@ describe('App', () => {
     expect(subject).toEqual(result);
   });
 
-  it('should have header', () => {
-    let subject = element(by.css('h1')).isPresent();
-    let result  = true;
-    expect(subject).toEqual(result);
-  });
-
   it('should have <home>', () => {
     let subject = element(by.css('app home')).isPresent();
     let result  = true;
@@ -25,7 +19,7 @@ describe('App', () => {
 
   it('should have buttons', () => {
     let subject = element(by.css('button')).getText();
-    let result  = 'Submit Value';
+    let result  = 'Create';
     expect(subject).toEqual(result);
   });
 
