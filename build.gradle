@@ -17,10 +17,9 @@ task postIt(type: StopVerticle) {
     mustRunAfter ':it'
 }
 
-task unzipDist(type: Copy, dependsOn: ':server:build') {
+task unzipDist(type: Copy, dependsOn: 'buildAll') {
     from tarTree('server/build/distributions/myserver-3.3.2.tar')
     into 'server/build/distributions/'
-    eachFile {println it.file.absolutePath}
 }
 
 task preIt(type: StartVerticle, dependsOn: ['unzipDist']) {
