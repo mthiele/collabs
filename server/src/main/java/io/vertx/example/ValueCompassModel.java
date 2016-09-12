@@ -1,5 +1,7 @@
 package io.vertx.example;
 
+import com.google.common.base.Strings;
+
 import org.apache.commons.lang.RandomStringUtils;
 
 import java.util.HashMap;
@@ -21,7 +23,15 @@ public class ValueCompassModel {
     this.idGenerator = idGenerator;
   }
 
-  public String newCompass() {
+  public ValueCompass newCompass(final CompassCreation compassCreation) {
+    checkPreconditions(compassCreation);
+    String id = generateId();
+    ValueCompass valueCompass = new ValueCompass(id, compassCreation.getName());
+    compassMap.put(id, valueCompass);
+    return valueCompass;
+  }
+
+  private String generateId() {
     String id;
     int attempts = 100;
     do {
@@ -30,8 +40,13 @@ public class ValueCompassModel {
       }
       id = idGenerator.get();
     } while (compassMap.containsKey(id));
-    compassMap.put(id, new ValueCompass(id));
     return id;
+  }
+
+  private void checkPreconditions(final CompassCreation compassCreation) {
+    if (Strings.isNullOrEmpty(compassCreation.getName()) || compassCreation.getName().trim().isEmpty()) {
+      throw new IllegalArgumentException("new compass must have a name");
+    }
   }
 
   public ValueCompass getCompass(final String id) {

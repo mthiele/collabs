@@ -19,8 +19,8 @@ public class ValueCompassModelTest {
 
   @Test
   public void creatingANewCompassShouldGenerateAUniqueId() {
-    String id1 = cut.newCompass();
-    String id2 = cut.newCompass();
+    String id1 = cut.newCompass(new CompassCreation("test")).getId();
+    String id2 = cut.newCompass(new CompassCreation("test")).getId();
     assertThat(id1).isNotEmpty();
     assertThat(id2).isNotEmpty();
     assertThat(id1).isNotEqualTo(id2);
@@ -31,9 +31,9 @@ public class ValueCompassModelTest {
     final Supplier<String> idGenMock = mock(Supplier.class);
     when(idGenMock.get()).thenReturn("a", "a", "b");
     ValueCompassModel newCut = new ValueCompassModel(idGenMock);
-    String id1 = newCut.newCompass();
+    String id1 = newCut.newCompass(new CompassCreation("test")).getId();
     assertThat(id1).isEqualTo("a");
-    String id2 = newCut.newCompass();
+    String id2 = newCut.newCompass(new CompassCreation("test")).getId();
     assertThat(id2).isEqualTo("b");
   }
 
@@ -42,20 +42,33 @@ public class ValueCompassModelTest {
     final Supplier<String> idGenMock = mock(Supplier.class);
     when(idGenMock.get()).thenReturn("a");
     ValueCompassModel newCut = new ValueCompassModel(idGenMock);
-    newCut.newCompass();
-    assertThatThrownBy(newCut::newCompass).isInstanceOf(RuntimeException.class);
+    newCut.newCompass(new CompassCreation("test"));
+    assertThatThrownBy(() -> newCut.newCompass(new CompassCreation("test"))).isInstanceOf(RuntimeException.class);
   }
 
   @Test
   public void aNewCompassShouldBeRetrievableById() {
-    String id = cut.newCompass();
+    String id = cut.newCompass(new CompassCreation("test")).getId();
     assertThat(cut.getCompass(id)).isNotNull();
     assertThat(cut.getCompass(id).getId()).isEqualTo(id);
   }
 
   @Test
   public void idIsAlphanumeric() {
-    String id = cut.newCompass();
+    String id = cut.newCompass(new CompassCreation("test")).getId();
     assertThat(id).matches("\\w+");
+  }
+
+  @Test
+  public void theNewCompassHasTheGivenName() {
+    String id = cut.newCompass(new CompassCreation("test")).getId();
+    assertThat(cut.getCompass(id).getName()).isEqualTo("test");
+  }
+
+  @Test
+  public void theNewCompassMustHaveAName() {
+    assertThatThrownBy(() -> cut.newCompass(new CompassCreation("  "))).isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> cut.newCompass(new CompassCreation(""))).isInstanceOf(IllegalArgumentException.class);
+    assertThatThrownBy(() -> cut.newCompass(new CompassCreation(null))).isInstanceOf(IllegalArgumentException.class);
   }
 }

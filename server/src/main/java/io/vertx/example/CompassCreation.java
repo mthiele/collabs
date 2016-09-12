@@ -1,23 +1,18 @@
 package io.vertx.example;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 
 import java.util.Objects;
 
 /**
- * Represents a value compass with its votings.
+ *
  */
-public class ValueCompass {
-  private final String id;
+public class CompassCreation {
   private final String name;
 
-  public ValueCompass(final String id, final String name) {
-    this.id = id;
+  public CompassCreation(@JsonProperty("name")final String name) {
     this.name = name;
-  }
-
-  public String getId() {
-    return id;
   }
 
   public String getName() {
@@ -32,19 +27,18 @@ public class ValueCompass {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    final ValueCompass that = (ValueCompass)o;
-    return Objects.equals(id, that.id);
+    final CompassCreation that = (CompassCreation)o;
+    return Objects.equals(name, that.name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id);
+    return Objects.hash(name);
   }
 
   @Override
   public String toString() {
     return MoreObjects.toStringHelper(this)
-        .add("id", id)
         .add("name", name)
         .toString();
   }

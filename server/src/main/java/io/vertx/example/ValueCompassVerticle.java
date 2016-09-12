@@ -4,6 +4,7 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.sockjs.BridgeEventType;
 import io.vertx.ext.web.handler.sockjs.BridgeOptions;
 import io.vertx.ext.web.handler.sockjs.PermittedOptions;
@@ -32,7 +33,8 @@ public class ValueCompassVerticle extends AbstractVerticle {
           .putHeader("content-type", "text/html")
           .end("<h1>Hello from my first Vert.x 3 application</h1>");
     });
-    router.route(HttpMethod.POST, "/api/valueCompass").handler(newValueCompassHandler::handle);
+    router.route("/api/valueCompass").handler(BodyHandler.create());
+    router.post("/api/valueCompass").handler(newValueCompassHandler::handle);
 
     vertx.createHttpServer().
         requestHandler(router::accept).
