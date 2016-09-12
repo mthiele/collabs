@@ -40,7 +40,7 @@ export class Home {
 
   gotoValueCompass(id: string): void {
     console.log('route to: ' + id);
-    let link = ['/valueCompass', id];
+    let link = ['/valueCompass', id, 'voting'];
     this.router.navigate(link);
   }
 

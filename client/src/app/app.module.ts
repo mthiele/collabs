@@ -21,7 +21,7 @@ import {RadarChartDemo} from "./chart/radarchartdemo.component";
 import {UIChart} from "primeng/components/chart/chart";
 import {ValueCompassService}          from './valueCompass.service';
 import './rxjs-extensions';
-import {ValueCompassComponent} from "./valuecompass/valueCompass.component";
+import {ValueCompassVotingComponent} from "./valuecompass/valueCompassVoting.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -37,7 +37,7 @@ const APP_PROVIDERS = [
   declarations: [
     App,
     Home,
-    ValueCompassComponent,
+    ValueCompassVotingComponent,
     NoContent,
     XLarge,
     RadarChartDemo,

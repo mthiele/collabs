@@ -5,10 +5,10 @@ import {ValueCompass} from "../valueCompass";
 import {Subscription} from "rxjs";
 
 @Component({
-  selector: 'value-compass',  // <value-compass></value-compass>
-  templateUrl: 'valueCompass.template.html'
+  selector: 'value-compass-voting',  // <value-compass></value-compass>
+  templateUrl: 'valueCompassVoting.template.html'
 })
-export class ValueCompassComponent implements OnInit {
+export class ValueCompassVotingComponent implements OnInit {
 
   private sub: Subscription;
 
