@@ -17,7 +17,7 @@ public class GetValueCompassHandler implements Handler<RoutingContext> {
 
   @Override
   public void handle(final RoutingContext event) {
-    String id = event.pathParam("id");
+    final String id = event.pathParam("id");
     System.out.println(id);
 
     final HttpServerResponse response = event.response();
