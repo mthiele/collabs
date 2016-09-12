@@ -23,18 +23,9 @@ task unzipDist(type: Copy, dependsOn: 'buildAll') {
 }
 
 task preIt(type: StartVerticle, dependsOn: ['unzipDist']) {
-    def basePath = "server/build/distributions/myserver-3.3.2"
     ready 'Succeeded in deploying verticle'
     finalizedBy postIt
-    directory basePath
-    def String classpath;
-    def libs = files { file("$basePath/lib").listFiles() }
-    if (System.getenv("CI") == null) {
-        classpath = libs.join(';')
-    } else {
-        classpath = libs.join(':')
-    }
-    command """java -classpath $classpath io.vertx.core.Launcher run io.vertx.example.ValueCompassVerticle"""
+    directory "server/build/distributions/myserver-3.3.2"
 }
 
 task it(dependsOn: ['preIt', ':client:npm_run_e2e']) {
@@ -43,7 +34,6 @@ task it(dependsOn: ['preIt', ':client:npm_run_e2e']) {
 
 // adapted from https://github.com/marc0der/gradle-spawn-plugin
 class StartVerticle extends DefaultTask {
-    String command
     String ready
     String directory
 
@@ -51,10 +41,17 @@ class StartVerticle extends DefaultTask {
 
     @TaskAction
     def spawnProcess() {
-        println "execute command: '$command'"
-        ProcessBuilder builder = new ProcessBuilder(command.split(' '))
+        def String classpath;
+        def libs =  new File("$directory/lib").listFiles().toList().collect {it.absolutePath}
+        if (System.getenv("TRAVIS") == null) {
+            classpath = libs.join(';')
+        } else {
+            classpath = libs.join(':')
+        }
+        println(classpath)
+        ProcessBuilder builder = new ProcessBuilder("""java -classpath $classpath io.vertx.core.Launcher run io.vertx.example.ValueCompassVerticle""".split(' '))
         builder.redirectErrorStream(true)
-        builder.directory(new File(directory))
+        builder.directory(new File("$directory"))
         process = builder.start()
 
         InputStream stdout = process.getInputStream()
