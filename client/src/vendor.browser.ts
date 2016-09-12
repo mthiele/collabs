@@ -22,6 +22,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
 import 'vertx3-eventbus-client';
+import 'sockjs';
 import 'primeng/primeng';
 import 'chart.js/dist/Chart.bundle.min';
 
