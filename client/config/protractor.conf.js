@@ -45,7 +45,7 @@ exports.config = {
   useAllAngular2AppRoots: true
 };
 
-if (process.env.TRAVIS === true) {
+if (process.env.TRAVIS !== undefined) {
   exports.config.capabilities = {'browserName': 'firefox'}
 }
 
