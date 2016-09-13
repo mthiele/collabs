@@ -29,10 +29,7 @@ exports.config = {
   directConnect: true,
 
   capabilities: {
-    'browserName': 'chrome',
-    'chromeOptions': {
-      args: ['--no-sandbox']
-    }
+    'browserName': 'chrome'
   },
 
   onPrepare: function () {
@@ -47,3 +44,8 @@ exports.config = {
    */
   useAllAngular2AppRoots: true
 };
+
+if (process.env.TRAVIS !== undefined) {
+  exports.config.capabilities = {'browserName': 'firefox'}
+}
+
