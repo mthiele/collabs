@@ -25,6 +25,9 @@ import 'vertx3-eventbus-client';
 import 'primeng/primeng';
 import 'chart.js/dist/Chart.bundle.min';
 
+import 'jquery';
+import 'bootstrap-loader';
+
 if ('production' === ENV) {
   // Production
 
