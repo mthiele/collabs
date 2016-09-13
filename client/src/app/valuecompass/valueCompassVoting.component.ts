@@ -1,18 +1,16 @@
-import {Component, OnInit, Renderer, ElementRef} from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import {ValueCompass} from "../valueCompass";
-import {Subscription} from "rxjs";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'value-compass-voting',  // <value-compass></value-compass>
   templateUrl: 'valueCompassVoting.template.html'
 })
 export class ValueCompassVotingComponent implements OnInit {
+  valueCompassId: string;
 
   private sub: Subscription;
-
-  valueCompassId: string;
 
   constructor(private route: ActivatedRoute) {
   }
