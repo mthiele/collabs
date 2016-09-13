@@ -1,27 +1,27 @@
-import {NgModule, ApplicationRef} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
-import {RouterModule} from '@angular/router';
-import {removeNgStyles, createNewHosts} from '@angularclass/hmr';
+import { NgModule, ApplicationRef } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 
 /*
  * Platform and Environment providers/directives/pipes
  */
-import {ENV_PROVIDERS} from './environment';
-import {ROUTES} from './app.routes';
+import { ENV_PROVIDERS } from './environment';
+import { ROUTES } from './app.routes';
 // App is our top level component
-import {App} from './app.component';
-import {APP_RESOLVER_PROVIDERS} from './app.resolver';
-import {AppState} from './app.service';
-import {Home} from './home';
-import {NoContent} from './no-content';
-import {XLarge} from './home/x-large';
-import {RadarChartDemo} from "./chart/radarchartdemo.component";
-import {UIChart} from "primeng/components/chart/chart";
-import {ValueCompassService}          from './valueCompass.service';
+import { App } from './app.component';
+import { APP_RESOLVER_PROVIDERS } from './app.resolver';
+import { AppState } from './app.service';
+import { Home } from './home';
+import { NoContent } from './no-content';
+import { XLarge } from './home/x-large';
+import { RadarChartDemo } from './chart/radarchartdemo.component';
+import { UIChart } from 'primeng/components/chart/chart';
+import { ValueCompassService } from './valueCompass.service';
 import './rxjs-extensions';
-import {ValueCompassVotingComponent} from "./valuecompass/valueCompassVoting.component";
+import { ValueCompassVotingComponent } from './valuecompass/valueCompassVoting.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -47,7 +47,7 @@ const APP_PROVIDERS = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES, {useHash: true})
+    RouterModule.forRoot(ROUTES, { useHash: true })
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
