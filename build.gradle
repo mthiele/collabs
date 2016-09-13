@@ -1,1 +1,80 @@
-task buildAll(dependsOn : [':client:npm_run_build', ':server:build'])
+import java.util.concurrent.TimeUnit
+
+apply plugin: 'java'
+
+println """\
+Welcome to Gradle $gradle.gradleVersion - http://www.gradle.org
+Gradle home is set to: $gradle.gradleHomeDir
+Gradle user directory is set to: $gradle.gradleUserHomeDir
+
+Base directory: $projectDir
+Running script ${relativePath(buildFile)}
+"""
+
+task buildAll(dependsOn: [':client:npm_run_build', ':server:build'])
+
+task postIt(type: StopVerticle) {
+    mustRunAfter ':it'
+}
+
+task unzipDist(type: Copy, dependsOn: 'buildAll') {
+    from tarTree('server/build/distributions/myserver-3.3.2.tar')
+    into 'server/build/distributions/'
+}
+
+task preIt(type: StartVerticle, dependsOn: ['unzipDist']) {
+    ready 'Succeeded in deploying verticle'
+    finalizedBy postIt
+    directory "server/build/distributions/myserver-3.3.2"
+}
+
+task it(dependsOn: ['preIt', ':client:npm_run_e2e']) {
+
+}
+
+// adapted from https://github.com/marc0der/gradle-spawn-plugin
+class StartVerticle extends DefaultTask {
+    String ready
+    String directory
+
+    static Process process;
+
+    @TaskAction
+    def spawnProcess() {
+        def String classpath;
+        def libs =  new File("$directory/lib").listFiles().toList().collect {it.absolutePath}
+        if (System.getenv("TRAVIS") == null) {
+            classpath = libs.join(';')
+        } else {
+            classpath = libs.join(':')
+        }
+        println(classpath)
+        ProcessBuilder builder = new ProcessBuilder("""java -classpath $classpath -Dfile.encoding=UTF-8 io.vertx.core.Launcher run io.vertx.example.ValueCompassVerticle""".split(' '))
+        builder.redirectErrorStream(true)
+        builder.directory(new File("$directory"))
+        process = builder.start()
+
+        InputStream stdout = process.getInputStream()
+        BufferedReader reader = new BufferedReader(new
+                InputStreamReader(stdout))
+        def String line
+        while ((line = reader.readLine()) != null) {
+            println line
+            if (line.contains(ready)) {
+                println "server is ready"
+                break;
+            }
+        }
+    }
+
+}
+
+class StopVerticle extends DefaultTask {
+    @TaskAction
+    def killProcess() {
+        while (StartVerticle.process.isAlive()) {
+            StartVerticle.process.destroyForcibly();
+            StartVerticle.process.waitFor(10, TimeUnit.SECONDS);
+        }
+    }
+}

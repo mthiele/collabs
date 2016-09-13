@@ -7,13 +7,7 @@ describe('App', () => {
 
   it('should have a title', () => {
     let subject = browser.getTitle();
-    let result  = 'Angular2 Webpack Starter by @gdi2290 from @AngularClass';
-    expect(subject).toEqual(result);
-  });
-
-  it('should have header', () => {
-    let subject = element(by.css('h1')).isPresent();
-    let result  = true;
+    let result  = 'Wertekompass für verteilte und agile Teams';
     expect(subject).toEqual(result);
   });
 
@@ -24,8 +18,8 @@ describe('App', () => {
   });
 
   it('should have buttons', () => {
-    let subject = element(by.css('button')).getText();
-    let result  = 'Submit Value';
+    let subject = element(by.css('button')).getAttribute("title");
+    let result  = 'Create';
     expect(subject).toEqual(result);
   });
 

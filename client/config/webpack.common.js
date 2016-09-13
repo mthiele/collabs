@@ -19,7 +19,7 @@ const HtmlElementsPlugin = require('./html-elements-plugin');
  * Webpack Constants
  */
 const METADATA = {
-  title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
+  title: 'Wertekompass für verteilte und agile Teams',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer()
 };
@@ -172,7 +172,13 @@ module.exports = {
       {
         test: /\.(jpg|png|gif)$/,
         loader: 'file'
-      }
+      },
+
+      /* Loaders for Bootstrap Fonts */
+      { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      { test: /\.ttf$/,    loader: "file-loader" },
+      { test: /\.eot$/,    loader: "file-loader" },
+      { test: /\.svg$/,    loader: "file-loader" }
     ]
 
   },
@@ -256,7 +262,10 @@ module.exports = {
     }),
 
     new ProvidePlugin({
-      EventBus: "vertx3-eventbus-client"
+      EventBus: "vertx3-eventbus-client",
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
     }),
 
   ],

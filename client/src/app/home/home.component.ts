@@ -1,8 +1,8 @@
-import {Component, Renderer, ElementRef} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, Renderer, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
-import {ValueCompassService} from "../valueCompass.service";
-import {ValueCompass} from "../valueCompass";
+import { ValueCompassService } from '../valueCompass.service';
+import { ValueCompass } from '../valueCompass';
 
 interface EventBus {
   onopen: () => void;
@@ -11,7 +11,7 @@ interface EventBus {
 
 declare var EventBus: {
   new (m: string): EventBus;
-}
+};
 
 @Component({
   selector: 'home',  // <home></home>
@@ -45,7 +45,7 @@ export class Home {
   }
 
   ngAfterViewInit() {
-    var eb = new EventBus('http://localhost:8080/eventbus');
+    let eb = new EventBus('http://localhost:8080/eventbus');
 
     eb.onopen = function () {
 
@@ -53,7 +53,7 @@ export class Home {
       eb.registerHandler('yeah', function (error, message) {
         // console.log('received a message: ' + message);
       });
-    }
+    };
   }
 
 }
