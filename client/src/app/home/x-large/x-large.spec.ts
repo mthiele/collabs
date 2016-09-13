@@ -22,7 +22,7 @@ describe('x-large directive', () => {
     resetFakeAsyncZone();
   });
 
-  fit('should sent font-size to x-large', fakeAsync(() => {
+  it('should sent font-size to x-large', fakeAsync(() => {
     TestBed.compileComponents().then(() => {
 
       const fixture = TestBed.createComponent(TestComponent);
