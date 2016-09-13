@@ -1,5 +1,6 @@
 package io.vertx.example;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
@@ -44,7 +45,7 @@ public class ValueCompassVerticleTest {
     vertx.createHttpClient().getNow(8080, "localhost", "/api/hello",
         response -> {
           response.handler(body -> {
-            context.assertTrue(body.toString().contains("Hello"));
+            assertThat(body.toString()).contains("Hello");
             async.complete();
           });
         });
@@ -62,8 +63,8 @@ public class ValueCompassVerticleTest {
         response -> {
           response.handler(body -> {
             final ValueCompass valueCompass = Json.decodeValue(body.toString(), ValueCompass.class);
-            context.assertEquals(valueCompass.getId(), testId);
-            context.assertEquals(valueCompass.getName(), testName);
+            assertThat(valueCompass.getId()).isEqualTo(testId);
+            assertThat(valueCompass.getName()).isEqualTo(testName);
             async.complete();
           });
           response.exceptionHandler(context.exceptionHandler());
@@ -79,12 +80,12 @@ public class ValueCompassVerticleTest {
         .putHeader("content-type", "application/json")
         .putHeader("content-length", length)
         .handler(response -> {
-          context.assertEquals(response.statusCode(), 201);
-          context.assertTrue(response.headers().get("content-type").contains("application/json"));
+          assertThat(response.statusCode()).isEqualTo(201);
+          assertThat(response.headers().get("content-type")).contains("application/json");
           response.bodyHandler(body -> {
             final ValueCompass valueCompass = Json.decodeValue(body.toString(), ValueCompass.class);
-            context.assertEquals(valueCompass.getName(), "test");
-            context.assertNotNull(valueCompass.getId());
+            assertThat(valueCompass.getName()).isEqualTo("test");
+            assertThat(valueCompass.getId()).isNotEmpty();
             async.complete();
           });
           response.exceptionHandler(context.exceptionHandler());
