@@ -17,14 +17,16 @@ import io.vertx.ext.web.handler.sockjs.SockJSHandler;
  */
 public class ValueCompassVerticle extends AbstractVerticle {
 
-  private ValueCompassModel valueCompassModel;
-  private NewValueCompassHandler newValueCompassHandler;
-  private GetValueCompassHandler getValueCompassHandler;
+  private final NewValueCompassHandler newValueCompassHandler;
+  private final GetValueCompassHandler getValueCompassHandler;
 
-  public ValueCompassVerticle() {
-    valueCompassModel = new ValueCompassModel();
+  public ValueCompassVerticle(final ValueCompassModel valueCompassModel) {
     newValueCompassHandler = new NewValueCompassHandler(valueCompassModel);
     getValueCompassHandler = new GetValueCompassHandler(valueCompassModel);
+  }
+
+  public ValueCompassVerticle() {
+    this(new ValueCompassModel());
   }
 
   @Override
@@ -49,7 +51,6 @@ public class ValueCompassVerticle extends AbstractVerticle {
     router.get("/api/valueCompass/:id").handler(getValueCompassHandler::handle);
     // Serve static resources from the /client directory
     router.route("/*").handler(StaticHandler.create("client"));
-
 
     vertx.createHttpServer().
         requestHandler(router::accept).

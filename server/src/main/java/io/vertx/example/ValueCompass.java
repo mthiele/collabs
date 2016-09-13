@@ -1,5 +1,6 @@
 package io.vertx.example;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.MoreObjects;
 
 import java.util.Objects;
@@ -11,7 +12,9 @@ public class ValueCompass {
   private final String id;
   private final String name;
 
-  public ValueCompass(final String id, final String name) {
+  public ValueCompass(
+      @JsonProperty("id") final String id,
+      @JsonProperty("name") final String name) {
     this.id = id;
     this.name = name;
   }
