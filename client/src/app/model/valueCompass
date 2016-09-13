@@ -1,0 +1,5 @@
+import {Voting} from "./voting";
+export class ValueCompass {
+  constructor(public votings: Voting[]) {
+  }
+}
