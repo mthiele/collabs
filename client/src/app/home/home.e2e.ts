@@ -8,15 +8,15 @@ describe('App', () => {
 
   it('should have a title', () => {
     let subject = browser.getTitle();
-    let result  = 'Wertekompass für verteilte und agile Teams';
+    let result = 'Wertekompass für verteilte und agile Teams';
     expect(subject).toEqual(result);
   });
 
   it('should not accept empty names', () => {
     let newButton = element(by.css('#btnNewValueCompass'));
-    expect(newButton.isPresent).toBeTruthy();
+    expect(newButton.isPresent()).toBeTruthy();
     let nameInput = element(by.css('#name'));
-    expect(nameInput.isPresent).toBeTruthy();
+    expect(nameInput.isPresent()).toBeTruthy();
     expect(nameInput.getAttribute('class')).toMatch('ng-invalid');
     expect(nameInput.getAttribute('class')).not.toMatch('ng-valid');
     expect(newButton.getAttribute('ng-reflect-disabled')).toEqual('true');
@@ -32,5 +32,15 @@ describe('App', () => {
     expect(nameInput.getAttribute('class')).not.toMatch('ng-invalid');
     expect(nameInput.getAttribute('class')).toMatch('ng-valid');
     expect(newButton.getAttribute('ng-reflect-disabled')).toEqual('false');
+  });
+
+  it('should create a new compass and route to coting site', () => {
+    let nameInput = element(by.css('#name'));
+    nameInput.sendKeys('new name');
+    let newButton = element(by.css('#btnNewValueCompass'));
+    newButton.click();
+    browser.waitForAngular();
+    expect(element(by.tagName('h1')).getText()).toMatch('Voting for Value Compass .*');
+    expect(browser.getCurrentUrl()).toMatch('.*valueCompass/.*/voting');
   });
 });
