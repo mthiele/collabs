@@ -1,6 +1,6 @@
-import {Injectable}    from '@angular/core';
-import {Headers, Http} from '@angular/http';
-import {ValueCompass} from "./valueCompass";
+import { Headers, Http } from '@angular/http';
+import { ValueCompass } from './valueCompass';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ValueCompassService {
@@ -23,7 +23,7 @@ export class ValueCompassService {
       .toPromise()
       .then(res => {
         console.log('received text: ' + res.text());
-        var valueCompass = res.json() as ValueCompass;
+        let valueCompass = res.json() as ValueCompass;
         console.log('received valueCompass: ' + valueCompass);
         return valueCompass;
       })
