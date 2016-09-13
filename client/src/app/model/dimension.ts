@@ -1,4 +1,4 @@
 export class Dimension {
-  constructor(public name: string, public value: string) {
+  constructor(public name: string, public valueOptions: number[], public value: number) {
   }
 }

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
+import {Voting} from "../model/voting";
+import {Dimension} from "../model/dimension";
 
 @Component({
   selector: 'value-compass-voting',  // <value-compass></value-compass>
@@ -9,6 +11,15 @@ import { Subscription } from 'rxjs';
 })
 export class ValueCompassVotingComponent implements OnInit {
   valueCompassId: string;
+  voting: Voting[] = [
+    new Voting(0, [
+      new Dimension("Fokus", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0),
+      new Dimension("Offenheit", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0),
+      new Dimension("Verpflichtung", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0),
+      new Dimension("Mut", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0),
+      new Dimension("Respekt", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0)
+    ])
+  ];
 
   private sub: Subscription;
 
@@ -25,5 +36,9 @@ export class ValueCompassVotingComponent implements OnInit {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  onSubmit() {
+
   }
 }
