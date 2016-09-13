@@ -49,7 +49,7 @@ class StartVerticle extends DefaultTask {
             classpath = libs.join(':')
         }
         println(classpath)
-        ProcessBuilder builder = new ProcessBuilder("""java -classpath $classpath io.vertx.core.Launcher run io.vertx.example.ValueCompassVerticle""".split(' '))
+        ProcessBuilder builder = new ProcessBuilder("""java  -classpath $classpath -Dfile.encoding=UTF-8 io.vertx.core.Launcher run io.vertx.example.ValueCompassVerticle""".split(' '))
         builder.redirectErrorStream(true)
         builder.directory(new File("$directory"))
         process = builder.start()
