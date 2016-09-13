@@ -18,7 +18,7 @@ describe('App', () => {
   });
 
   it('should have buttons', () => {
-    let subject = element(by.css('button')).getAttribute("title");
+    let subject = element(by.css('button')).getAttribute('title');
     let result  = 'Create';
     expect(subject).toEqual(result);
   });
