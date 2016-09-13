@@ -1,6 +1,4 @@
-import {inject, TestBed, tick, fakeAsync} from "@angular/core/testing";
-import {BaseRequestOptions, Http} from "@angular/http";
-import {MockBackend} from "@angular/http/testing";
+import {inject, TestBed, tick, fakeAsync, resetFakeAsyncZone} from "@angular/core/testing";
 import {Home} from "./home.component";
 import {Router} from "@angular/router";
 import {ValueCompassService} from "../valueCompass.service";
@@ -37,6 +35,7 @@ describe('Home', () => {
         }
       ]
     });
+    resetFakeAsyncZone();
   });
 
   it('should log ngOnInit', inject([Home], (home) => {
