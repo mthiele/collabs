@@ -21,15 +21,6 @@ class MockRouter {
 }
 var mockRouter = new MockRouter();
 
-/*
- BaseRequestOptions,
- MockBackend,
- {
- provide: Http,
- deps: [MockBackend, BaseRequestOptions]
- },
- */
-
 describe('Home', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEach(() => {
@@ -60,8 +51,6 @@ describe('Home', () => {
     home.newCompassName = 'Hello';
     home.createCompass();
     tick();
-    // this is not ideal yet, as we need to know which args are passed to the Router and it is dependent on the
-    // implementation detail that a Router is used; better to check whether the new URL contains the ':id' and 'voting'.
     expect(mockRouter.navigate).toHaveBeenCalledWith(['/valueCompass', '1', 'voting']);
   })));
 });
