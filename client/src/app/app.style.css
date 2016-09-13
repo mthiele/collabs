@@ -12,6 +12,10 @@ span.active {
   text-align: center;
 }
 
+.uncentered {
+  text-align: left;
+}
+
 main {
   min-height: 100%;
   height: auto !important;
