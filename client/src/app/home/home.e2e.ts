@@ -1,3 +1,10 @@
+import elementTextContains = protractor.until.elementTextContains;
+import elementIsVisible = webdriver.until.elementIsVisible;
+import tagName = webdriver.By.tagName;
+import Condition = protractor.until.Condition;
+import elementLocated = protractor.until.elementLocated;
+import id = webdriver.By.id;
+
 describe('App', () => {
 
   beforeEach(() => {
@@ -39,8 +46,10 @@ describe('App', () => {
     nameInput.sendKeys('new name');
     let newButton = element(by.css('#btnNewValueCompass'));
     newButton.click();
-    browser.waitForAngular();
-    expect(element(by.tagName('h1')).getText()).toMatch('Voting for Value Compass .*');
-    expect(browser.getCurrentUrl()).toMatch('.*valueCompass/.*/voting');
+
+    browser.wait(protractor.until.elementLocated(by.id('voting-headline'))).then(a => {
+      expect(browser.getCurrentUrl()).toMatch('.*valueCompass/.*/voting');
+      expect(element(by.id('voting-headline')).getText()).toMatch('bla blubb');
+    })
   });
 });
