@@ -42,7 +42,7 @@ describe('App', () => {
 
     browser.wait(protractor.until.elementLocated(by.id('voting-headline'))).then(a => {
       expect(browser.getCurrentUrl()).toMatch('.*valueCompass/.*/voting');
-      expect(element(by.id('voting-headline')).getText()).toMatch('bla blubb');
+      expect(element(by.id('voting-headline')).getText()).toMatch('Voting for Value Compass.*');
     })
   });
 });
