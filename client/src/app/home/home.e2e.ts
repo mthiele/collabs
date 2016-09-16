@@ -1,10 +1,3 @@
-import elementTextContains = protractor.until.elementTextContains;
-import elementIsVisible = webdriver.until.elementIsVisible;
-import tagName = webdriver.By.tagName;
-import Condition = protractor.until.Condition;
-import elementLocated = protractor.until.elementLocated;
-import id = webdriver.By.id;
-
 describe('App', () => {
 
   beforeEach(() => {
