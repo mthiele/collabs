@@ -1,4 +1,5 @@
 import java.util.concurrent.TimeUnit
+import org.apache.tools.ant.taskdefs.condition.Os
 
 apply plugin: 'java'
 
@@ -43,7 +44,7 @@ class StartVerticle extends DefaultTask {
     def spawnProcess() {
         def String classpath;
         def libs =  new File("$directory/lib").listFiles().toList().collect {it.absolutePath}
-        if (System.getenv("TRAVIS") == null) {
+        if (Os.isFamily(Os.FAMILY_WINDOWS)) {
             classpath = libs.join(';')
         } else {
             classpath = libs.join(':')
