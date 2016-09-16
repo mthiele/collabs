@@ -1,7 +1,7 @@
-import {fakeAsync, tick, TestBed, resetFakeAsyncZone} from "@angular/core/testing";
-import {Component} from "@angular/core";
-import {By} from "@angular/platform-browser/src/dom/debug/by";
-import {XLarge} from "./x-large.directive";
+import { fakeAsync, tick, TestBed, resetFakeAsyncZone } from "@angular/core/testing";
+import { Component } from "@angular/core";
+import { By } from "@angular/platform-browser/src/dom/debug/by";
+import { XLarge } from "./x-large.directive";
 
 // Load the implementations that should be tested
 
